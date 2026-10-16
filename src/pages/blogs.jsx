@@ -1,10 +1,10 @@
 
-import BlogHero from "../Components/blogs/blogstart";
-import BlogGrid from "../Components/blogs/bloggrid";
+import BlogHero from "../components/blogs/blogstart";
+import BlogGrid from "../components/blogs/bloggrid";
 // import Newsletter from "../Components/Blog/Newsletter";
-import Footer from "../Components/Essntials/footer";
-import Seo from "../Components/Essntials/Seo";
-import LeadMagnet from "@/Components/Home/MVPBlueprint";
+import Footer from "../components/Essntials/footer";
+import Seo from "../components/Essntials/Seo";
+import LeadMagnet from "@/components/Home/MVPBlueprint";
 
 const BlogPage = () => {
   return (

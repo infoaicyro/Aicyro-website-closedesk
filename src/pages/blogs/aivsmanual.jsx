@@ -1,10 +1,10 @@
 "use client";
 import React, { useRef } from "react";
 import HTMLFlipBook from "react-pageflip";
-import Navbar from "@/Components/Essntials/Navbar"; // Ensure this path matches your file structure
-import Footer from "@/Components/Essntials/footer";
+import Navbar from "@/components/Essntials/Navbar"; // Ensure this path matches your file structure
+import Footer from "@/components/Essntials/footer";
 import { motion } from "framer-motion";
-import LeadMagnet from "@/Components/Home/AIReadinessTeaser";
+import LeadMagnet from "@/components/Home/AIReadinessTeaser";
 
 
 // --- 1. DECORATIVE COMPONENTS ---

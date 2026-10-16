@@ -9,8 +9,8 @@ import {
   Activity,
   PieChart,
 } from "lucide-react";
-import Navbar from "../../Components/Essntials/Navbar";
-import Footer from "../../Components/Essntials/footer";
+import Navbar from "../../components/Essntials/Navbar";
+import Footer from "../../components/Essntials/footer";
 
 // Firebase
 import { ref, push, serverTimestamp } from "firebase/database";

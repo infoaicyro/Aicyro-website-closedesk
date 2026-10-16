@@ -3,9 +3,9 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import Navbar from "@/Components/Essntials/Navbar";
-import Footer from "@/Components/Essntials/footer";
-import LeadMagnet from "@/Components/Home/AIReadinessTeaser";
+import Navbar from "@/components/Essntials/Navbar";
+import Footer from "@/components/Essntials/footer";
+import LeadMagnet from "@/components/Home/AIReadinessTeaser";
 
 import {
   Clock,

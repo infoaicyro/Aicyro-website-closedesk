@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Navbar from "../../Components/Essntials/Navbar";
-import MVPBlueprint from "../../Components/Home/MVPBlueprint";
-import Footer from "../../Components/Essntials/footer";
-import Seo from "../../Components/Essntials/Seo";
+import Navbar from "../../components/Essntials/Navbar";
+import MVPBlueprint from "../../components/Home/MVPBlueprint";
+import Footer from "../../components/Essntials/footer";
+import Seo from "../../components/Essntials/Seo";
 
 // --- FIREBASE IMPORTS ---
 import { ref, onValue } from "firebase/database";

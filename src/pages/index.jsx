@@ -570,24 +570,24 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Head from "next/head";
-import Hero from "../Components/Home/Hero";
+import Hero from "../components/Home/Hero";
 import Faqs from "../Components/Home/extra/faqs";
-import Footer from "../Components/Essntials/footer";
+import Footer from "../components/Essntials/footer";
 import Favicon from "../assets/favicon.png";
-import Navbar from "../Components/Essntials/Navbar";
+import Navbar from "../components/Essntials/Navbar";
 import { ArrowRight, Calculator } from "lucide-react"; 
 
-import LogoAnimation from "../Components/LogoAnimation";
-import LeadMagnet from "@/Components/Home/LeadMagnet";
-import ProblemSection from "@/Components/Home/problemsection";
-import ServicesSection from "@/Components/Home/sevicesslection";
-import ProcessSection from "@/Components/Home/ProcessSection";
-import CaseSection from "@/Components/Home/CaseSection";
-import WhyChooseSection from "@/Components/Home/WhyChooseSection";
-import Testimonial from "@/Components/Home/Testimonial";
-import ClientLoo from "@/Components/Home/clienlogos";
-import LeadMagnetAIReadiness from "@/Components/Home/AIReadinessTeaser";
-import Leadmangnet4 from "@/Components/Home/EstimatorTeaser.jsx";
+import LogoAnimation from "../components/LogoAnimation";
+import LeadMagnet from "@/components/Home/LeadMagnet";
+import ProblemSection from "@/components/Home/problemsection";
+import ServicesSection from "@/components/Home/sevicesslection";
+import ProcessSection from "@/components/Home/ProcessSection";
+import CaseSection from "@/components/Home/CaseSection";
+import WhyChooseSection from "@/components/Home/WhyChooseSection";
+import Testimonial from "@/components/Home/Testimonial";
+import ClientLoo from "@/components/Home/clienlogos";
+import LeadMagnetAIReadiness from "@/components/Home/AIReadinessTeaser";
+import Leadmangnet4 from "@/components/Home/EstimatorTeaser.jsx";
 
 // --- Imported Popupform from the old version ---
 import Popupform from "@/components/Form/Popupform";

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../Components/Essntials/Navbar";
-import Footer from "../Components/Essntials/footer";
-import Seo from "../Components/Essntials/Seo";
+import Navbar from "../components/Essntials/Navbar";
+import Footer from "../components/Essntials/footer";
+import Seo from "../components/Essntials/Seo";
 import Link from "next/link";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { ArrowLeft, Download, MessageSquareText } from "lucide-react";

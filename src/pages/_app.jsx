@@ -191,20 +191,38 @@ const poppins = Poppins({
 // Initialize Logger
 const routerLogger = createWebsiteLogger("AppRouter");
 
+const isExcludedRoute = (pathname) => {
+  if (!pathname) return false;
+  return (
+    pathname === "/lg" ||
+    pathname.startsWith("/lg/") ||
+    pathname === "/logs" ||
+    pathname.startsWith("/logs/") ||
+    pathname === "/log" ||
+    pathname.startsWith("/log/")
+  );
+};
+
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   const [showSplash, setShowSplash] = useState(false);
 
-  // Define isLogsPage to hide the banner/popups on the logs page
-  const isLogsPage = router.pathname === "/logs";
+  const isExcluded = isExcludedRoute(router.pathname);
 
   useEffect(() => {
+    // 🛑 Do not load splash logo animation on /lg, /log, or /logs pages
+    const currentPath = router.pathname || (typeof window !== "undefined" ? window.location.pathname : "");
+    if (isExcludedRoute(currentPath)) {
+      setShowSplash(false);
+      return;
+    }
+
     const hasVisited = sessionStorage.getItem("aicyro_visited");
     if (!hasVisited) {
       setShowSplash(true);
       sessionStorage.setItem("aicyro_visited", "true");
     }
-  }, []);
+  }, [router.pathname]);
 
   // Merged Tracking and Logging Logic
   useEffect(() => {
@@ -246,7 +264,9 @@ export default function App({ Component, pageProps }) {
         <link rel="icon" href={Favicon.src} />
       </Head>
       
-      {showSplash && <LogoAnimation onComplete={() => setShowSplash(false)} />}
+      {!isExcluded && showSplash && (
+        <LogoAnimation onComplete={() => setShowSplash(false)} />
+      )}
       
       <ThemeProvider>
         <RootLayout className={poppins.className}>
@@ -254,14 +274,6 @@ export default function App({ Component, pageProps }) {
           <GlobalActivityTracker />
 
           <Component {...pageProps} />
-          
-          {/* Conditionally hide cookie banner and popups on /logs route */}
-          {!isLogsPage && (
-            <>
-              {/* <Popupform /> */}
-              <CookieConsentBanner />
-            </>
-          )}
         </RootLayout>
       </ThemeProvider>
     </GoogleOAuthProvider>

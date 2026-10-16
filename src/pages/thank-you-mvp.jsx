@@ -3,8 +3,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Download, Calendar, ArrowRight, CheckCircle } from "lucide-react";
-import Navbar from "../Components/Essntials/Navbar";
-import Footer from "../Components/Essntials/footer";
+import Navbar from "../components/Essntials/Navbar";
+import Footer from "../components/Essntials/footer";
 
 const ThankYouMVP = () => {
   return (

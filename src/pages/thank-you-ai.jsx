@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { CheckCircle, ArrowRight, BarChart3, Mail } from "lucide-react";
-import Navbar from "../Components/Essntials/Navbar";
-import Footer from "../Components/Essntials/footer";
+import Navbar from "../components/Essntials/Navbar";
+import Footer from "../components/Essntials/footer";
 
 const ThankYouAI = () => {
   const router = useRouter();

@@ -8,8 +8,8 @@ import { ref, get } from "firebase/database";
 import { database } from "../lib/firebase12";
 
 // --- COMPONENTS ---
-import Navbar from "../Components/Essntials/Navbar";
-import Footer from "../Components/Essntials/footer";
+import Navbar from "../components/Essntials/Navbar";
+import Footer from "../components/Essntials/footer";
 
 const LoginPage = () => {
   const router = useRouter();

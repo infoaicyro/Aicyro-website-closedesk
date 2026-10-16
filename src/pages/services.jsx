@@ -1,11 +1,11 @@
 
-import Footer from "../Components/Essntials/footer";
-import Seo from "../Components/Essntials/Seo";
-import ServicesIntro from "@/Components/services/ServicesIntro";
-import Navbar from "@/Components/Essntials/Navbar";
-import CoreServices from "@/Components/services/detailcoreservices";
-import AdditionalCapabilities from "@/Components/services/AdditionalCapabilities";
-import ProcessSection from "@/Components/services/ProcessSection";
+import Footer from "../components/Essntials/footer";
+import Seo from "../components/Essntials/Seo";
+import ServicesIntro from "@/components/services/ServicesIntro";
+import Navbar from "@/components/Essntials/Navbar";
+import CoreServices from "@/components/services/detailcoreservices";
+import AdditionalCapabilities from "@/components/services/AdditionalCapabilities";
+import ProcessSection from "@/components/services/ProcessSection";
 
 const ServicesPage = () => {
   return (

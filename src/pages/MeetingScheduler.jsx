@@ -14,8 +14,8 @@ import {
 import { useGoogleLogin } from '@react-oauth/google';
 
 // --- COMPONENTS ---
-import Navbar from '../Components/Essntials/Navbar'; //
-import Footer from '../Components/Essntials/footer'; //
+import Navbar from '../components/Essntials/Navbar'; //
+import Footer from '../components/Essntials/footer'; //
 
 const MeetingScheduler = () => {
   const [formData, setFormData] = useState({ 

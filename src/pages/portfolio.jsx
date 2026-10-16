@@ -1,11 +1,11 @@
 
 
-import Footer from "../Components/Essntials/footer";
-import Seo from "../Components/Essntials/Seo";
-import Navbar from "@/Components/Essntials/Navbar";
-import Section from "../Components/portfolio/intro";
-import CaseStudiesSection from "@/Components/portfolio/CaseStudiesSection";
-import PortfolioCTA from "@/Components/portfolio/PortfolioCTA";
+import Footer from "../components/Essntials/footer";
+import Seo from "../components/Essntials/Seo";
+import Navbar from "@/components/Essntials/Navbar";
+import Section from "../components/portfolio/intro";
+import CaseStudiesSection from "@/components/portfolio/CaseStudiesSection";
+import PortfolioCTA from "@/components/portfolio/PortfolioCTA";
 
 
 const PortfolioPage = () => {

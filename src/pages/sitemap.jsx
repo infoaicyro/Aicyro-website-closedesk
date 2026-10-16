@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Navbar from "../Components/Essntials/Navbar";
-import Footer from "../Components/Essntials/footer";
-import Seo from "../Components/Essntials/Seo";
+import Navbar from "../components/Essntials/Navbar";
+import Footer from "../components/Essntials/footer";
+import Seo from "../components/Essntials/Seo";
 
 const SitemapPage = () => {
   // Animation variants

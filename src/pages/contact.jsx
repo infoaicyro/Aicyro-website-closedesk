@@ -1,11 +1,11 @@
 
-import Footer from "../Components/Essntials/footer";
-import Seo from "../Components/Essntials/Seo";
-import Contactform from "../Components/contactus/contactform"
-import Navbar from "@/Components/Essntials/Navbar";
-import ContactCTA from "@/Components/contactus/contactusCTA";
-import Test from "@/Components/contactus/test";
-import LeadMagnet from "@/Components/Home/MVPBlueprint";
+import Footer from "../components/Essntials/footer";
+import Seo from "../components/Essntials/Seo";
+import Contactform from "../components/contactus/contactform"
+import Navbar from "@/components/Essntials/Navbar";
+import ContactCTA from "@/components/contactus/contactusCTA";
+import Test from "@/components/contactus/test";
+import LeadMagnet from "@/components/Home/MVPBlueprint";
 
 const ContactPage = () => {
   return (

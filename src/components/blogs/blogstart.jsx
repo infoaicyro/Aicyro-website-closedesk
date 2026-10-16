@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 // Adjust the path if your Navbar is in a different folder (e.g., ../Components/Essntials/Navbar)
 import Navbar from "../Essntials/Navbar";
 import Link from "next/link";

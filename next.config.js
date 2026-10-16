@@ -46,36 +46,41 @@ const nextConfig = {
   // Redirect configuration
   async redirects() {
     return [
-      // ==============================================================================
-      // SCENARIO 1: Redirect ENTIRE SITE to a new domain
-      // ==============================================================================
-      /*
       {
-        source: '/:path*',
-        destination: 'https://www.new-domain.com/:path*',
+        source: '/about-us',
+        destination: '/about',
         permanent: true,
       },
-      */
-      // ==============================================================================
-      // SCENARIO 2: Redirect ALL pages within a specific folder
-      // ==============================================================================
-      /*
+      {
+        source: '/blog',
+        destination: '/blogs',
+        permanent: true,
+      },
       {
         source: '/blog/:slug*',
-        destination: '/articles/:slug*',
+        destination: '/blogs/:slug*',
         permanent: true,
       },
-      */
-      // ==============================================================================
-      // SCENARIO 3: Maintenance Mode (Redirect ALL pages to one page)
-      // ==============================================================================
-      /*
       {
-        source: '/((?!maintenance).*)',
-        destination: '/maintenance',
+        source: '/portfolio/portfolio/:slug*',
+        destination: '/portfolio/:slug*',
+        permanent: true,
+      },
+      {
+        source: '/portfolio/autoscholar',
+        destination: '/portfolio/autoscholor',
+        permanent: true,
+      },
+      {
+        source: '/portfolio/healthanalyzer',
+        destination: '/portfolio/healthanalyser',
+        permanent: true,
+      },
+      {
+        source: '/login',
+        destination: '/mes',
         permanent: false,
       },
-      */
     ];
   },
 };

@@ -154,14 +154,19 @@ const NotFoundPage = () => {
 
 
             <div className="flex flex-wrap justify-center gap-8 text-sm text-[var(--foreground-muted)]">
-              {["Services", "Portfolio", "About Us"].map((item) => (
+              {[
+                { name: "Services", href: "/services" },
+                { name: "Portfolio", href: "/portfolio" },
+                { name: "About Us", href: "/about" },
+                { name: "Blogs", href: "/blogs" },
+              ].map((item) => (
                 <Link
-                  key={item}
-                  href={`/${item.toLowerCase().replace(" ", "-")}`}
+                  key={item.name}
+                  href={item.href}
                   // UPDATED: Hover text color
                   className="hover:text-[var(--foreground)] transition-colors duration-200"
                 >
-                  {item}
+                  {item.name}
                 </Link>
               ))}
             </div>

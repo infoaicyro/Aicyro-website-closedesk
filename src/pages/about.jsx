@@ -1,11 +1,11 @@
-import Aboutstart from "../Components/Aboutus/Aboutstart";
+import Aboutstart from "../components/Aboutus/Aboutstart";
 
-import Footer from "../Components/Essntials/footer";
-import Seo from "../Components/Essntials/Seo";
-import Vision from "../Components/Aboutus/vision"
-import Mission from "../Components/Aboutus/Mission"
-import Whyus from "../Components/Aboutus/whyus"
-import AboutusCTA from "@/Components/Aboutus/AboutusCTA";
+import Footer from "../components/Essntials/footer";
+import Seo from "../components/Essntials/Seo";
+import Vision from "../components/Aboutus/vision"
+import Mission from "../components/Aboutus/Mission"
+import Whyus from "../components/Aboutus/whyus"
+import AboutusCTA from "@/components/Aboutus/AboutusCTA";
 
 const AboutPage = () => {
   return (

@@ -13,6 +13,7 @@
     "@aws-sdk/client-polly": "^3.1095.0",
     "@aws-sdk/client-transcribe": "^3.1095.0",
     "@react-oauth/google": "^0.13.5",
+    "@react-pdf/renderer": "^4.9.0",
     "@vis.gl/react-google-maps": "^1.10.1",
     "firebase": "^12.13.0",
     "formidable": "^3.5.4",

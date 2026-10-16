@@ -571,7 +571,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import Hero from "../components/Home/Hero";
-import Faqs from "../Components/Home/extra/faqs";
+// import Faqs from "../components/Home/extra/faqs";
 import Footer from "../components/Essntials/footer";
 import Favicon from "../assets/favicon.png";
 import Navbar from "../components/Essntials/Navbar";

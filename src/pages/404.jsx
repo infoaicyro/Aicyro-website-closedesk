@@ -1,167 +1,180 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
+import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { motion } from "framer-motion";
+import Navbar from "../Components/Essntials/Navbar";
+import Footer from "../Components/Essntials/footer";
+import Favicon from "../assets/favicon.png";
 
-export default function Custom404() {
-  const router = useRouter();
-  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
-  const [pupilPos, setPupilPos] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  const eyeRef = useRef(null);
+const NotFoundPage = () => {
+  // Animation: Smooth, subtle fade-in upward
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.15,
+        ease: "easeOut",
+      },
+    },
+  };
 
-  // Track mouse movement for ambient glow and eye tracking
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      // 1. Ambient Background Position
-      const x = (e.clientX / window.innerWidth) * 100;
-      const y = (e.clientY / window.innerHeight) * 100;
-      setMousePos({ x, y });
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
 
-      // 2. AI Eye Tracking Logic
-      if (eyeRef.current) {
-        const rect = eyeRef.current.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        
-        // Calculate angle and distance from center of the eye
-        const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-        // Cap the movement distance so the pupil stays inside the eye
-        const distance = Math.min(12, Math.hypot(e.clientX - centerX, e.clientY - centerY) / 20);
-        
-        setPupilPos({
-          x: Math.cos(angle) * distance,
-          y: Math.sin(angle) * distance,
-        });
-      }
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  // Animation: Slow, "breathing" gradient pulse instead of bouncing
+  const gradientAnimation = {
+    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+    transition: {
+      duration: 8,
+      repeat: Infinity,
+      ease: "linear",
+    },
+  };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-[var(--background)] text-[var(--foreground)] overflow-hidden font-sans">
-      
-      {/* Interactive Ambient Mouse Glow */}
-      <div
-        className="absolute inset-0 pointer-events-none transition-transform duration-75 ease-out opacity-30 mix-blend-screen"
-        style={{
-          background: `radial-gradient(circle 800px at ${mousePos.x}% ${mousePos.y}%, var(--primary), transparent 60%)`,
-          filter: "blur(80px)",
-        }}
-      />
+    // UPDATED: Background and Text variables
+    <div className="relative bg-[var(--background)] min-h-screen flex flex-col font-sans selection:bg-[var(--secondary)]/30 selection:text-white transition-colors duration-300">
+      <Head>
+        <title>Page Not Found | Aicyro Solutions</title>
+        <meta
+          name="description"
+          content="The page you are looking for might have been removed or is temporarily unavailable."
+        />
+        <link rel="icon" href={Favicon.src} />
+      </Head>
 
-      {/* Background Grid Pattern with Radial Fade Mask */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-40"
-        style={{
-          backgroundImage: `url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CjxwYXRoIGQ9Ik0wIDBoNDB2NDBIMHoiIGZpbGw9Im5vbmUiLz4KPHBhdGggZD0iTTAgMTBoNDBNMTAgMHY0ME0wIDIwaDQwTTIwIDB2NDBNMCAzMGg0ME0zMCAwdjQwIiBzdHJva2U9InJnYmEoMTUwLCAxNTAsIDE1MCwgMC4wNSkiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=")`,
-          WebkitMaskImage: "radial-gradient(circle at center, black 30%, transparent 90%)",
-          maskImage: "radial-gradient(circle at center, black 30%, transparent 90%)"
-        }}
-      />
-
-      {/* Main 404 Container (Floating) */}
-      <div className="relative z-10 flex flex-col items-center w-full max-w-2xl px-6 fade-in-up animate-float">
-        
-        {/* Interactive AI Radar "Eye" */}
+      {/* Professional Background: Grid & Subtle Spotlight */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
+        {/* Grid Pattern */}
+        {/* UPDATED: Uses foreground variable for grid lines with low opacity */}
         <div
-          ref={eyeRef}
-          className="relative w-36 h-36 mb-6 group cursor-pointer"
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
-        >
-          {/* Outer Pulsing Rings */}
-          <div className="absolute inset-0 rounded-full border-2 border-[var(--primary)] opacity-20 animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite]" />
-          <div className="absolute inset-2 rounded-full border border-[var(--primary)] opacity-40 animate-[spin_4s_linear_infinite] border-t-transparent shadow-[0_0_15px_var(--primary)_inset]" />
-          <div className="absolute inset-5 rounded-full border border-[var(--accent-blue)] opacity-50 animate-[spin_3s_linear_infinite_reverse] border-b-transparent" />
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)`,
+            backgroundSize: "40px 40px",
+          }}
+        />
 
-          {/* Center Core (Tracks Mouse) */}
-          <div
-            className={`absolute inset-8 rounded-full bg-gradient-to-br from-[var(--primary)] to-[var(--accent-blue)] transition-all flex items-center justify-center
-              ${isHovering ? "scale-110 shadow-[0_0_60px_var(--primary)]" : "scale-100 shadow-[0_0_30px_var(--primary)]"}`}
-            style={{ 
-              transform: `translate(${pupilPos.x}px, ${pupilPos.y}px) ${isHovering ? 'scale(1.1)' : 'scale(1)'}`,
-              transition: isHovering ? 'transform 0.2s ease-out' : 'transform 0.1s ease-out'
-            }}
-          >
-            {/* Inner Pupil Glow */}
-            <div className="w-5 h-5 bg-white rounded-full animate-pulse shadow-[0_0_15px_white,0_0_30px_var(--primary)]"></div>
-          </div>
-        </div>
-
-        {/* 404 Text */}
-        <h1 className="text-[7rem] sm:text-[9rem] font-black leading-none text-transparent bg-clip-text bg-gradient-to-b from-[var(--foreground)] via-[var(--foreground)/80] to-transparent drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] select-none tracking-tighter">
-        404
-        </h1>
-
-        {/* Glassmorphism Card */}
-        <div className="bg-[var(--card-bg)]/40 backdrop-blur-2xl border border-[var(--border-color)] ring-1 ring-white/5 rounded-3xl p-8 sm:p-12 text-center shadow-[0_20px_50px_rgba(0,0,0,0.1)] mt-4 sm:mt-8 w-full relative z-20 overflow-hidden group">
-          {/* Subtle Card Highlight on hover */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-          <h2 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] tracking-tight mb-3">
-            Signal Lost in the Mainframe
-          </h2>
-          <p className="text-[var(--foreground)]/70 text-sm sm:text-base font-medium mb-8 max-w-md mx-auto leading-relaxed">
-            The AI searched the entire database, but the page you are looking
-            for doesn't exist, has been moved, or is temporarily offline.
-          </p>
-
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              onClick={() => router.back()}
-              className="w-full sm:w-auto px-7 py-3.5 rounded-xl border border-[var(--border-color)] text-[var(--foreground)] text-sm font-bold bg-transparent hover:bg-[var(--foreground)]/5 hover:border-[var(--primary)] transition-all flex items-center justify-center gap-2 group/btn"
-            >
-              <svg
-                className="w-4 h-4 group-hover/btn:-translate-x-1 transition-transform"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2.5"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-              Go Back
-            </button>
-
-            <Link
-              href="/"
-              className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-[var(--primary)] to-[var(--accent-blue)] text-white text-sm font-bold shadow-[0_4px_20px_var(--lead-glow)] hover:shadow-[0_4px_25px_var(--primary)] hover:opacity-90 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2"
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2.5"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-              </svg>
-              Navigate Home
-            </Link>
-          </div>
-        </div>
+        {/* Central Spotlight - Controlled and subtle */}
+        {/* UPDATED: Uses secondary variable */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[var(--secondary)] opacity-[0.08] blur-[120px] rounded-full pointer-events-none" />
       </div>
 
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        .fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes fadeInUp { 
-          from { opacity: 0; transform: translateY(30px) scale(0.95); } 
-          to { opacity: 1; transform: translateY(0) scale(1); } 
-        }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        @keyframes float {
-          0% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-          100% { transform: translateY(0px); }
-        }
-      `,
-        }}
-      />
+      {/* Navbar */}
+      <div className="relative z-50">
+        <Navbar />
+      </div>
+
+      {/* Main Content */}
+      <motion.main
+        className="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-28 pb-16 relative z-10"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <div className="max-w-3xl mx-auto text-center w-full">
+          {/* Main 404 Display */}
+          <motion.div
+            className="relative mb-8 inline-block"
+            variants={itemVariants}
+          >
+            <motion.h1
+              // UPDATED: Gradient uses Foreground -> Secondary -> Primary
+              className="text-[8rem] sm:text-[10rem] md:text-[12rem] font-bold leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[var(--foreground)] via-[var(--secondary)] to-[var(--primary)] opacity-90"
+              animate={gradientAnimation}
+              style={{ backgroundSize: "200% auto" }}
+            >
+              404
+            </motion.h1>
+          </motion.div>
+
+          {/* Professional Copy */}
+          <motion.div variants={itemVariants} className="mb-10 space-y-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-[var(--foreground)] tracking-tight">
+              Page not found
+            </h2>
+            <p className="text-base sm:text-lg text-[var(--foreground-muted)] max-w-lg mx-auto leading-relaxed font-light">
+              The page you are looking for might have been removed, had its name
+              changed, or is temporarily unavailable.
+            </p>
+          </motion.div>
+
+          {/* Action Area */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+          >
+            <Link href="/">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                // UPDATED: Background uses Primary, Shadow uses Primary
+                className="px-8 py-3 text-sm font-medium text-white transition-all duration-200 rounded-lg bg-[var(--primary)] hover:opacity-90 shadow-lg shadow-[var(--primary)]/20 border border-transparent min-w-[160px]"
+              >
+                Go to Homepage
+              </motion.button>
+            </Link>
+
+            <Link href="/contact">
+              <motion.button
+                whileHover={{
+                  scale: 1.02,
+                }}
+                whileTap={{ scale: 0.98 }}
+                // UPDATED: Border uses border-color, Text uses muted/foreground
+                className="px-8 py-3 text-sm font-medium text-[var(--foreground-muted)] transition-all duration-200 rounded-lg border border-[var(--border-color)] hover:border-[var(--foreground)]/20 hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/5 min-w-[160px]"
+              >
+                Contact Support
+              </motion.button>
+            </Link>
+          </motion.div>
+
+          {/* Clean Divider */}
+          <motion.div
+            variants={itemVariants}
+            // UPDATED: Border color
+            className="border-t border-[var(--border-color)] max-w-sm mx-auto"
+          />
+
+          {/* Quick Links - Clean list format */}
+          <motion.div variants={itemVariants} className="pt-8">
+            <p className="text-xs uppercase tracking-widest text-[var(--foreground-muted)] mb-5 font-semibold">
+              Helpful Links
+            </p>
+            
+
+
+            <div className="flex flex-wrap justify-center gap-8 text-sm text-[var(--foreground-muted)]">
+              {["Services", "Portfolio", "About Us"].map((item) => (
+                <Link
+                  key={item}
+                  href={`/${item.toLowerCase().replace(" ", "-")}`}
+                  // UPDATED: Hover text color
+                  className="hover:text-[var(--foreground)] transition-colors duration-200"
+                >
+                  {item}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </motion.main>
+
+      {/* Footer */}
+      <div className="relative z-50">
+        <Footer />
+      </div>
     </div>
   );
-}
+};
+
+export default NotFoundPage;

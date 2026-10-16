@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import Navbar from "@/Components/Essntials/Navbar";
-import Footer from "@/Components/Essntials/footer";
+import Navbar from "@/components/Essntials/Navbar";
+import Footer from "@/components/Essntials/footer";
 import {
   ShieldCheck,
   Lock,

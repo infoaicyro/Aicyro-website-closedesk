@@ -76,9 +76,13 @@ import CookieConsentBanner from "../components/Essntials/CookieConsentBanner";
 export default function RootLayout({ children }) {
   const router = useRouter();
 
-  // Check if the current page is the admin dashboard (/lg) or the logs page (/logs)
-  const isDashboard = router.pathname === "/lg";
-  const isLogsPage = router.pathname === "/logs";
+  // Check if the current page is the admin dashboard (/lg) or the logs page (/logs, /log)
+  const isDashboard = router.pathname === "/lg" || router.pathname.startsWith("/lg/");
+  const isLogsPage =
+    router.pathname === "/logs" ||
+    router.pathname.startsWith("/logs/") ||
+    router.pathname === "/log" ||
+    router.pathname.startsWith("/log/");
 
   // Hide floating elements (chatbot, sticky btn, cookie banner) on dashboard and logs pages
   const hideFloatingElements = isDashboard || isLogsPage;

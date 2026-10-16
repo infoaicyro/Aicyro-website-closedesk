@@ -1,6 +1,6 @@
 // src/components/Essential/CookieConsentBanner.jsx
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ref, set } from "firebase/database";
 import { db } from "../../lib/firebase";
 import {
@@ -46,6 +46,7 @@ function getReadableDeviceName() {
 const getIpAndLocation = async (txLogger = baseLogger) => {
   try {
     const response = await fetch("https://ipinfo.io/json");
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
     let lat = null,
       lng = null;
@@ -66,6 +67,21 @@ const getIpAndLocation = async (txLogger = baseLogger) => {
     };
   } catch (error) {
     txLogger.warn("network_request", "ip_fetch_failed", { error });
+    try {
+      const res2 = await fetch("https://api.bigdatacloud.net/data/reverse-geocode-client");
+      if (res2.ok) {
+        const d2 = await res2.json();
+        return {
+          ip: "unknown",
+          city: d2.city || d2.locality || "Unknown",
+          region: d2.principalSubdivision || "Unknown",
+          country: d2.countryName || "Unknown",
+          lat: d2.latitude ? parseFloat(d2.latitude) : null,
+          lng: d2.longitude ? parseFloat(d2.longitude) : null,
+        };
+      }
+    } catch (_) {}
+
     return {
       ip: "unknown",
       city: "Unknown",
@@ -87,34 +103,50 @@ const getUserLocation = (txLogger = baseLogger) => {
       return;
     }
 
-    navigator.geolocation.getCurrentPosition(
-      (position) =>
-        resolve({
-          status: "allowed",
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        }),
-      (error) => {
-        txLogger.debug("user_action", "geolocation_denied", {
-          error,
-          context: { error_message: error.message },
-        });
-        resolve({
-          status: "rejected",
-          error: error.message,
-          lat: null,
-          lng: null,
-        });
-      },
-      { timeout: 8000 },
-    );
+    try {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          resolve({
+            status: "allowed",
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            accuracy: position.coords.accuracy,
+          });
+        },
+        (error) => {
+          txLogger.debug("user_action", "geolocation_denied", {
+            error,
+            context: { error_message: error.message, code: error.code },
+          });
+          resolve({
+            status: "rejected",
+            error: error.message,
+            code: error.code,
+            lat: null,
+            lng: null,
+          });
+        },
+        {
+          enableHighAccuracy: false,
+          timeout: 15000,
+          maximumAge: 60000,
+        },
+      );
+    } catch (err) {
+      resolve({
+        status: "rejected",
+        error: err.message,
+        lat: null,
+        lng: null,
+      });
+    }
   });
 };
 
 /**
  * Helper: Silent tracker that runs regardless of whether the banner is open or closed
  */
-const executeSilentTracking = async (consentStatus) => {
+const executeSilentTracking = async (consentStatus, customLocationPromise = null) => {
   const txId = generateCorrelationId();
   const txLogger = baseLogger.child({ correlation: { correlation_id: txId } });
   
@@ -123,9 +155,12 @@ const executeSilentTracking = async (consentStatus) => {
   const storedAppUser = typeof window !== "undefined" ? localStorage.getItem("aicyro_username") : null;
   const username = storedAppUser || `Visitor_${anonId ? anonId.substring(0, 8) : "Guest"}`;
 
+  const locationPromise = customLocationPromise || getUserLocation(txLogger);
+  const ipPromise = getIpAndLocation(txLogger);
+
   const [locationData, ipData] = await Promise.all([
-    getUserLocation(txLogger),
-    getIpAndLocation(txLogger),
+    locationPromise,
+    ipPromise,
   ]);
 
   const payload = {
@@ -155,6 +190,7 @@ const executeSilentTracking = async (consentStatus) => {
 export default function CookieConsentBanner() {
   const [showBanner, setShowBanner] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const locationPromiseRef = useRef(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -177,6 +213,9 @@ export default function CookieConsentBanner() {
       baseLogger.info("ui_render", "banner_displayed", {
         context: { message: "Cookie banner locked screen" },
       });
+
+      // 🔥 Trigger browser location access prompt immediately upon displaying banner
+      locationPromiseRef.current = getUserLocation(baseLogger);
     }
 
     // Cleanup function
@@ -196,13 +235,15 @@ export default function CookieConsentBanner() {
     // Only save the permanent cookie to the browser if they ACCEPT
     if (status === "accepted") {
       setStrictCookie(CONSENT_COOKIE_NAME, { status, timestamp: Date.now() });
-    } else {
-      // If rejected, we remove the cookie in case it was there, ensuring it pops up next reload
-      document.cookie = `${CONSENT_COOKIE_NAME}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-    }
 
-    // Execute the tracking for this specific page view
-    await executeSilentTracking(status);
+      // If location is already requested or resolved, use it; otherwise request via user gesture
+      const locationPromise = locationPromiseRef.current || getUserLocation(baseLogger);
+      await executeSilentTracking(status, locationPromise);
+    } else {
+      // If rejected, remove cookie and record rejection without waiting for GPS
+      document.cookie = `${CONSENT_COOKIE_NAME}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+      await executeSilentTracking(status, Promise.resolve({ status: "rejected", lat: null, lng: null }));
+    }
 
     setIsSaving(false);
     closeBanner();

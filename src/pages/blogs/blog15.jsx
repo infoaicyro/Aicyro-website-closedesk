@@ -2,8 +2,8 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import Navbar from "@/Components/Essntials/Navbar";
-import Footer from "@/Components/Essntials/footer";
+import Navbar from "@/components/Essntials/Navbar";
+import Footer from "@/components/Essntials/footer";
 import {
   ArrowRight,
   Twitter,

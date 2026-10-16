@@ -81,6 +81,11 @@ const nextConfig = {
         destination: '/mes',
         permanent: false,
       },
+      {
+        source: '/og-image.jpg',
+        destination: '/og-image.png',
+        permanent: true,
+      },
     ];
   },
 };

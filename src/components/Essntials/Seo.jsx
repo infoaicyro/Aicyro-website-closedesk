@@ -2,7 +2,7 @@ import Head from "next/head";
 
 const SITE_NAME = "Aicyro Solutions";
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://aicyro.com";
-const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.jpg`;
+const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.png`;
 const DEFAULT_LOCALE = "en_US";
 const DEFAULT_KEYWORDS =
   "SaaS development company, Cyber security experts, Aicyro Solutions, AI solutions, Cloud & DevOps, App development, Web development, VAPT, QA automation, Blockchain security, Software agency";
@@ -34,7 +34,7 @@ const Seo = ({
     "@type": "Organization",
     name: SITE_NAME,
     url: BASE_URL,
-    logo: `${BASE_URL}/og-image.jpg`,
+    logo: `${BASE_URL}/og-image.png`,
   };
 
   return (

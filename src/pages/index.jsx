@@ -672,7 +672,7 @@ const HomePage = () => {
           content="Aicyro builds secure custom software, AI solutions, SaaS platforms, and cloud applications for startups and enterprises. Book a free consultation today."
         />
         <meta property="og:url" content="https://aicyro.com/" />
-        <meta property="og:image" content="https://aicyro.com/og-image.jpg" />
+        <meta property="og:image" content="https://aicyro.com/og-image.png" />
         <meta property="og:site_name" content="Aicyro Solutions" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -684,7 +684,7 @@ const HomePage = () => {
           name="twitter:description"
           content="Aicyro builds secure custom software, AI solutions, SaaS platforms, and cloud applications for startups and enterprises. Book a free consultation today."
         />
-        <meta name="twitter:image" content="https://aicyro.com/og-image.jpg" />
+        <meta name="twitter:image" content="https://aicyro.com/og-image.png" />
 
         <script
           type="application/ld+json"

@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
-import Navbar from "../components/Essential/Navbar copy";
-import Footer from "../components/Essential/Footer";
+import Navbar from "../components/Essntials/Navbar";
+import Footer from "../components/Essntials/footer";
 
 const TOTAL_STEPS = 16;
 const CALENDLY_URL = "#";

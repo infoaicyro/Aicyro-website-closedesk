@@ -1,8 +1,8 @@
 // src/pages/cookie.jsx
 import React from "react";
-import Seo from "../components/Essential/Seo";
-import Navbar from "../components/Essential/Navbar";
-import Footer from "../components/Essential/Footer";
+import Seo from "../components/Essntials/Seo";
+import Navbar from "../components/Essntials/Navbar";
+import Footer from "../components/Essntials/footer";
 
 export default function CookiePolicy() {
   return (

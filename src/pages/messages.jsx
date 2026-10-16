@@ -71,7 +71,7 @@ const MessagesPage = () => {
 
     if (!storedUser) {
       // Not logged in? Redirect to login
-      router.push("/login");
+      router.push("/mes");
     } else {
       setCurrentUser(JSON.parse(storedUser));
       setAuthChecking(false);

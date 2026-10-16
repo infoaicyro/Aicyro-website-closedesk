@@ -258,7 +258,11 @@ const CaseStudyCard = ({ data, index }) => {
         {/* Clickable Overlay for whole card */}
         {data.url && (
           <Link
-            href={data.url}
+            href={
+              data.url.startsWith("http") || data.url.startsWith("/")
+                ? data.url
+                : `/${data.url}`
+            }
             className="absolute inset-0 z-20"
             aria-label={`View ${data.title}`}
           />

@@ -122,7 +122,7 @@ const weOfferData = {
           "https://dummyimages.netlify.app/services/light/Cloud%20and%20DevOps.png",
         button: {
           text: "Talk to our DEVOPS Experts ",
-          link: "/services/qa-automation",
+          link: "/services/cloud-devops",
           icon: "lightning",
         },
       },

@@ -166,9 +166,9 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import "@/styles/globals.css";
 import Favicon from "../assets/favicon.png";
-import LogoAnimation from "../Components/LogoAnimation";
+import LogoAnimation from "../components/LogoAnimation";
 import RootLayout from "./layout";
-import ThemeProvider from "../Components/ThemeProvider";
+import ThemeProvider from "../components/ThemeProvider";
 
 // Tracking, Tracing, and Logging Imports
 import { trackVisit } from "../lib/activityTracker";
